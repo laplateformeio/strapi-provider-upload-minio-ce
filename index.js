@@ -3,13 +3,14 @@ const mime = require("mime-types");
 
 module.exports = {
   init(providerOptions) {
-    const { port, useSSL, endPoint, accessKey, secretKey, bucket, host, folder } = providerOptions;
+    const { port, useSSL, endPoint, accessKey, secretKey, bucket, host, folder, region } = providerOptions;
     const MINIO = new Minio.Client({
       endPoint,
       port: +port || 9000,
       useSSL: useSSL === "true",
       accessKey,
       secretKey,
+      region
     });
     const getUploadPath = (file) => {
       const pathChunk = file.path ? `${file.path}/` : '';
